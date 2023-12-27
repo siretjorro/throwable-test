@@ -4,7 +4,6 @@ import android.app.Application
 import mobi.lab.throwabletest.App
 import mobi.lab.throwabletest.demo.login.LoginFragment
 import mobi.lab.throwabletest.demo.main.MainFragment
-import mobi.lab.throwabletest.demo.prototype.PrototypeActivity
 import mobi.lab.throwabletest.splash.SplashActivity
 
 /**
@@ -56,10 +55,6 @@ object Injector : BaseAppComponent {
     }
 
     override fun inject(target: LoginFragment) {
-        appComponent.inject(target)
-    }
-
-    override fun inject(target: PrototypeActivity) {
         appComponent.inject(target)
     }
 }

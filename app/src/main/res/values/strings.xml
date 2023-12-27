@@ -7,15 +7,14 @@
     <!-- Demo screen values. These can be removed -->
     <string name="demo_title_error">Error</string>
     <string name="demo_text_loading">Loading</string>
-    <string name="demo_title_email">Email</string>
-    <string name="demo_title_password">Password</string>
+    <string name="demo_title_email">Email (use any)</string>
+    <string name="demo_title_password">Password (use any)</string>
     <string name="demo_title_login">Login</string>
     <string name="demo_text_required">Required</string>
-    <string name="demo_text_experience_prototype">Experience the prototype</string>
-    <string name="demo_text_experience_prototype_description">Tap on the link below to experience the flow of the already created designs.</string>
-    <string name="demo_title_open_prototype">Open the prototype</string>
+    <string name="demo_text_random_dog_facts">A random fact about dogs</string>
+    <string name="demo_text_dog_fact">Dogs have 4 paws</string>
     <string name="demo_">Log out</string>
-    <string name="demo_title_prototype">Prototype</string>
+    <string name="demo_title_dog_facts">Dog facts</string>
     <string name="demo_error_generic">Something went wrong. Please try again.</string>
     <string name="demo_error_no_network">Connection error. Please try again.</string>
 </resources>

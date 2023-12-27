@@ -15,7 +15,6 @@ import mobi.lab.mvvm.asLiveData
 import mobi.lab.throwabletest.common.rx.SchedulerProvider
 import mobi.lab.throwabletest.common.rx.dispose
 import mobi.lab.throwabletest.common.util.errorCode
-import mobi.lab.throwabletest.demo.prototype.PrototypeViewModel
 import mobi.lab.throwabletest.domain.entities.ErrorCode
 import mobi.lab.throwabletest.domain.usecases.auth.LoginUseCase
 import java.util.concurrent.TimeUnit

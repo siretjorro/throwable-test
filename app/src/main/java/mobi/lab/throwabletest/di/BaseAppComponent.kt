@@ -3,7 +3,6 @@ package mobi.lab.throwabletest.di
 import mobi.lab.throwabletest.App
 import mobi.lab.throwabletest.demo.login.LoginFragment
 import mobi.lab.throwabletest.demo.main.MainFragment
-import mobi.lab.throwabletest.demo.prototype.PrototypeActivity
 import mobi.lab.throwabletest.splash.SplashActivity
 
 /**
@@ -19,7 +18,6 @@ import mobi.lab.throwabletest.splash.SplashActivity
 interface BaseAppComponent {
     fun inject(target: App)
     fun inject(target: SplashActivity)
-    fun inject(target: PrototypeActivity)
     fun inject(target: MainFragment)
     fun inject(target: LoginFragment)
 }

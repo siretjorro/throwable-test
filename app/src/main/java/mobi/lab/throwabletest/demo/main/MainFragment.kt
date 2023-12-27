@@ -16,7 +16,6 @@ import mobi.lab.throwabletest.common.debug.DebugActions
 import mobi.lab.throwabletest.common.platform.LogoutMonitor
 import mobi.lab.throwabletest.common.util.NavUtil
 import mobi.lab.throwabletest.databinding.DemoFragmentMainBinding
-import mobi.lab.throwabletest.demo.prototype.PrototypeActivity
 import mobi.lab.throwabletest.di.Injector
 import javax.inject.Inject
 
@@ -45,7 +44,6 @@ class MainFragment : BaseFragment(), ViewBindingHolder<DemoFragmentMainBinding> 
         super.onViewCreated(view, savedInstanceState)
         requireBinding {
             initToolbar(this)
-            buttonOpen.setOnClickListener { viewModel.onOpenPrototypeClicked() }
         }
 
         /**
@@ -58,9 +56,9 @@ class MainFragment : BaseFragment(), ViewBindingHolder<DemoFragmentMainBinding> 
             }
 
             when (event) {
-                is MainViewModel.Action.OpenWebLink -> openPrototype(context, event.url)
                 is MainViewModel.Action.RestartApplication -> restartApplication(context)
                 is MainViewModel.Action.OpenDebug -> openDebug(context)
+                is MainViewModel.Action.ShowDogFact -> showDogFact(event.facts)
             }
             return@onEachEvent true
         }
@@ -93,11 +91,6 @@ class MainFragment : BaseFragment(), ViewBindingHolder<DemoFragmentMainBinding> 
         }
     }
 
-    private fun openPrototype(context: Context, url: String) {
-        // Open PrototypeActivity to demonstrate assisted injection with runtime arguments
-        startActivity(PrototypeActivity.getIntent(context, url))
-    }
-
     private fun restartApplication(context: Context) {
         NavUtil.restartApplication(context)
     }
@@ -105,6 +98,12 @@ class MainFragment : BaseFragment(), ViewBindingHolder<DemoFragmentMainBinding> 
     private fun openDebug(context: Context) {
         // Open DebugActivity
         debugActions.launchDebugActivity(context)
+    }
+
+    private fun showDogFact(facts: List<String>) {
+        requireBinding {
+            textDescription.text = facts[0]
+        }
     }
 
     companion object {

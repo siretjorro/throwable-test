@@ -31,14 +31,13 @@ class MainViewModel @Inject constructor(
 
     private var disposable: Disposable? = null
 
+    init {
+        getDogFacts()
+    }
+
     override fun onCleared() {
         super.onCleared()
         dispose(disposable)
-    }
-
-    fun onOpenPrototypeClicked() {
-        // TODO add proper url here
-        _action.value = SingleEvent(Action.OpenWebLink("https://www.google.com"))
     }
 
     fun onDebugClicked() {
@@ -73,6 +72,7 @@ class MainViewModel @Inject constructor(
 
     private fun onGetDogFactsSuccess(response: DogFactsResponse) {
         _state.value = State.Default
+        _action.value = SingleEvent(Action.ShowDogFact(response.facts))
     }
 
     private fun onGetDogFactsFailure(error: Throwable) {
@@ -80,9 +80,9 @@ class MainViewModel @Inject constructor(
     }
 
     sealed class Action {
-        data class OpenWebLink(val url: String) : Action()
         object RestartApplication : Action()
         class OpenDebug : Action()
+        data class ShowDogFact(val facts: List<String>) : Action()
     }
 
     sealed class State {

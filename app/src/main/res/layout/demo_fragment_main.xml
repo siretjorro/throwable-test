@@ -13,7 +13,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/demo_title_prototype" />
+        app:title="@string/demo_title_dog_facts" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
@@ -42,21 +42,13 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="@dimen/size_48" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/demo_img_brush"
-                app:tint="@color/primary"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
-
             <TextView
                 android:id="@+id/text_title"
                 style="@style/Text.Heading1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_48"
-                android:text="@string/demo_text_experience_prototype"
+                android:text="@string/demo_text_random_dog_facts"
                 app:layout_constraintEnd_toEndOf="@id/guide_end"
                 app:layout_constraintStart_toStartOf="@id/guide_start"
                 app:layout_constraintTop_toTopOf="parent"/>
@@ -67,21 +59,10 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/size_24"
-                android:text="@string/demo_text_experience_prototype_description"
+                android:text="@string/demo_text_dog_fact"
                 app:layout_constraintEnd_toEndOf="@id/guide_end"
                 app:layout_constraintStart_toStartOf="@id/guide_start"
                 app:layout_constraintTop_toBottomOf="@id/text_title"/>
-
-            <mobi.lab.components.button.LabButton
-                android:id="@+id/button_open"
-                style="@style/Button"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/size_48"
-                android:text="@string/demo_title_open_prototype"
-                app:layout_constraintEnd_toEndOf="@id/guide_end"
-                app:layout_constraintStart_toStartOf="@id/guide_start"
-                app:layout_constraintTop_toBottomOf="@id/text_description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
