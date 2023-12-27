@@ -1,0 +1,67 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    // Needed for Dagger
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.parcelize)
+}
+
+android {
+    namespace = "mobi.lab.throwabletest.domain"
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled = true
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        compileSdkVersion(libs.versions.android.sdk.compile.get())
+        targetSdkVersion(libs.versions.android.sdk.target.get())
+        minSdkVersion(libs.versions.android.sdk.min.get())
+    }
+
+    lint {
+        // Workaround for a bug in Kotlin extension's Parcelize
+        warning("ParcelCreator")
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events("passed", "skipped", "failed", "standardOut", "standardError")
+            // Always show output even if the result has not changed
+            outputs.upToDateWhen { false }
+            // Show standard stream outputs if used
+            showStandardStreams = true
+        }
+    }
+}
+
+// Set kapt jvm version. https://youtrack.jetbrains.com/issue/KT-55947/Unable-to-set-kapt-jvm-target-version
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    // Testing
+    libsHelper.addUnitTestDependencies(it)
+    // Dagger
+    libsHelper.addDaggerDependencies(it)
+
+    implementation libs.kotlin
+    coreLibraryDesugaring libs.jdk.desugar
+
+    implementation libs.rxjava
+    implementation libs.timber
+    implementation libs.kotlin.coroutines
+
+    implementation project(":app-common")
+}

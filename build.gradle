@@ -1,0 +1,74 @@
+buildscript {
+    apply(from: "$rootDir/dependencies.gradle")
+}
+
+plugins {
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.parcelize) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.ksp) apply false
+    alias(libs.plugins.firebase.crashlytics) apply false
+    alias(libs.plugins.google.services) apply false
+    alias(libs.plugins.ktlint.gradle)
+    alias(libs.plugins.gradleVersions)
+    alias(libs.plugins.detekt)
+}
+
+subprojects {
+    // KTLint (Kotlin code style enforcer)
+    apply(plugin: libs.plugins.ktlint.gradle.get().pluginId)
+    ktlint {
+        version = "0.50.0"
+        outputToConsole = true
+    }
+
+    // Detekt (Kotlin static analyser)
+    apply(plugin: libs.plugins.detekt.get().pluginId)
+    detekt {
+        allRules = true // Include all rules
+        buildUponDefaultConfig = true // preconfigure defaults (see the rule set file below for explanations)
+        config = files("${project.rootDir}/config/detekt/detekt-config.yaml") // point to your custom config defining rules to run, overwriting default behavior
+
+        reports {
+            html.enabled = true // Create a HTML report
+            xml.enabled = false // XML report not needed
+            txt.enabled = false // txt report not needed
+        }
+    }
+    tasks.detekt.jvmTarget = "1.8"
+    afterEvaluate {
+        // Make sure detekt is executed with all the other linters for all modules
+        check.dependsOn "detekt"
+    }
+
+    task checkCode(dependsOn: ["detekt", "ktlintCheck"])
+    checkCode.group = "Verification"
+    checkCode.description = "Run detekt and ktlint"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+// Don't show non stable updates for current stable versions
+def isNonStable = { String version ->
+    def stableKeyword = ["RELEASE", "FINAL", "GA"].any { keyword -> version.toUpperCase().contains(keyword) }
+    def regex = /^[0-9,.v-]+(-r)?$/
+    return !stableKeyword && !(version ==~ regex)
+}
+
+dependencyUpdates {
+    checkForGradleUpdate = true
+
+    resolutionStrategy {
+        componentSelection {
+            all {
+                if (isNonStable(candidate.version) && !isNonStable(currentVersion)) {
+                    reject("Release candidate")
+                }
+            }
+        }
+    }
+}

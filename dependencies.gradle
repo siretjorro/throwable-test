@@ -1,0 +1,23 @@
+/*
+ Helper functions to add multiple dependencies to different configurations
+ Version Catalogs is used for version management. See gradle/libs.versions.toml
+ */
+
+// This definition type lets us define all functions in a single place and access them via deps.
+ext.libsHelper = [
+        addUnitTestDependencies: { handler ->
+            handler.testImplementation libs.test.junit
+            handler.testImplementation libs.test.junit.kotlin
+            handler.testImplementation libs.test.mockito.core
+            handler.testImplementation libs.test.mockito.kotlin
+            handler.testImplementation libs.test.androidx.archtesting
+            handler.testImplementation libs.test.kotlin.coroutines
+            handler.testImplementation libs.test.truth
+            handler.testImplementation libs.test.mockk
+        },
+
+        addDaggerDependencies: { handler ->
+            handler.implementation libs.dagger
+            handler.kapt libs.dagger.compiler
+        }
+]

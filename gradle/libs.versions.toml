@@ -1,0 +1,107 @@
+[versions]
+
+android-sdk-min = "23"
+android-sdk-target = "33"
+android-sdk-compile = "android-34"
+
+android-gradle-plugin = "8.2.0"
+
+kotlin = "1.9.20"
+dagger = "2.48.1"
+retrofit = "2.9.0"
+glide = "4.16.0"
+moshi = "1.15.0"
+kotshi = "2.14.0"
+
+[plugins]
+
+android-application = { id = "com.android.application", version.ref = "android-gradle-plugin" }
+android-library = { id = "com.android.library", version.ref = "android-gradle-plugin" }
+
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-ksp = { id = "com.google.devtools.ksp", version = "1.9.20-1.0.14" }
+
+# NB! Make sure to update the kltint version set in the root build.gradle file. subprojects / ktlint / version
+# NB! ktlint-gradle doesn't always depend on the latest ktlint version, but since it is a thin wrapper around ktlint
+# NB! it can be usefult to use a newer version of ktlint to get ruleset updates, etc.
+ktlint-gradle = { id = "org.jlleitschuh.gradle.ktlint", version = "11.6.1" }
+gradleVersions = { id = "com.github.ben-manes.versions", version = "0.50.0" }
+detekt = { id = "io.gitlab.arturbosch.detekt", version = "1.23.3" }
+
+google-services = { id = "com.google.gms.google-services", version = "4.4.0"}
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version = "2.9.9" }
+
+[libraries]
+
+# Language
+kotlin = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
+jdk-desugar = "com.android.tools:desugar_jdk_libs:2.0.4"
+
+# Firebase
+firebase-bom = "com.google.firebase:firebase-bom:32.6.0"
+firebase-crashlytics = { module = "com.google.firebase:firebase-crashlytics" }
+firebase-analytics = { module = "com.google.firebase:firebase-analytics" }
+
+# Android + UI
+material = "com.google.android.material:material:1.10.0"
+material-progressbar = "me.zhanghai.android.materialprogressbar:library:1.6.1"
+material-dialogs = "com.afollestad.material-dialogs:core:3.3.0"
+constraintlayout = "androidx.constraintlayout:constraintlayout:2.1.4"
+androidx-appcompat = "androidx.appcompat:appcompat:1.6.1"
+androidx-core = "androidx.core:core:1.12.0"
+androidx-fragment-ktx = "androidx.fragment:fragment-ktx:1.6.2"
+androidx-lifecycle-extensions = "androidx.lifecycle:lifecycle-extensions:2.2.0"
+androidx-legacy = "androidx.legacy:legacy-support-v4:1.0.0"
+androidx-livedata = "androidx.lifecycle:lifecycle-livedata-ktx:2.6.2"
+androidx-viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2"
+androidx-splashscreen = "androidx.core:core-splashscreen:1.0.1"
+
+# Lab design components
+lab-components = "mobi.lab.labcomponents:labcomponents:0.0.10"
+lab-mvvm = "mobi.lab.mvvm:mvvm:3.0.0"
+
+# RxJava
+rxjava = "io.reactivex.rxjava3:rxjava:3.1.8"
+rxjava-android = "io.reactivex.rxjava3:rxandroid:3.0.2"
+
+# Dagger
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
+
+# Utilities
+scrolls = "mobi.lab.scrolls:scrolls:2.0.9"
+timber = "com.jakewharton.timber:timber:5.0.1"
+eventbus = "org.greenrobot:eventbus:3.3.1"
+
+# Json
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+kotshi-api = { module = "se.ansman.kotshi:api", version.ref = "kotshi" }
+kotshi-compiler = { module = "se.ansman.kotshi:compiler", version.ref = "kotshi" }
+
+# Network
+retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
+retrofit-adapter-rxjava = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofit" }
+retrofit-converter-moshi = { module = "com.squareup.retrofit2:converter-moshi", version.ref = "retrofit" }
+okhttp-logging-interceptor = "com.squareup.okhttp3:logging-interceptor:4.12.0"
+
+# Glide
+glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
+glide-okhttp3 = { module = "com.github.bumptech.glide:okhttp3-integration", version.ref = "glide" }
+glide-compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
+
+# Testing
+test-junit = "junit:junit:4.13.2"
+test-junit-kotlin = { module = "org.jetbrains.kotlin:kotlin-test-junit", version.ref = "kotlin" }
+test-mockito-core = "org.mockito:mockito-core:5.7.0"
+test-mockito-kotlin = "com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0"
+test-androidx-archtesting = "androidx.arch.core:core-testing:2.2.0"
+test-truth = 'com.google.truth:truth:1.1.4'
+test-mockk = 'io.mockk:mockk:1.13.7'
+
+# Kotlin
+kotlin-coroutines = 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4'
+test-kotlin-coroutines = 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+

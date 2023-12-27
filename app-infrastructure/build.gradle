@@ -1,0 +1,90 @@
+plugins {
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.ksp)
+}
+
+android {
+    namespace = "mobi.lab.throwabletest.infrastructure"
+
+    buildFeatures {
+        buildConfig = true
+    }
+
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    compileOptions {
+        // Flag to enable support for the new language APIs
+        coreLibraryDesugaringEnabled = true
+
+        sourceCompatibility = JavaVersion.VERSION_1_8
+        targetCompatibility = JavaVersion.VERSION_1_8
+    }
+
+    defaultConfig {
+        compileSdkVersion(libs.versions.android.sdk.compile.get())
+        targetSdkVersion(libs.versions.android.sdk.target.get())
+        minSdkVersion(libs.versions.android.sdk.min.get())
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled = true
+            consumerProguardFiles("proguard-rules.pro")
+        }
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events("passed", "skipped", "failed", "standardOut", "standardError")
+            // Always show output even if the result has not changed
+            outputs.upToDateWhen { false }
+            // Show standard stream outputs if used
+            showStandardStreams = true
+        }
+    }
+}
+
+// Set kapt jvm version. https://youtrack.jetbrains.com/issue/KT-55947/Unable-to-set-kapt-jvm-target-version
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    libsHelper.addUnitTestDependencies(it)
+    libsHelper.addDaggerDependencies(it)
+
+    implementation libs.kotlin
+    coreLibraryDesugaring libs.jdk.desugar
+
+    implementation libs.timber
+    implementation libs.rxjava
+    implementation libs.androidx.core
+
+    // Json
+    implementation libs.moshi
+    implementation libs.moshi.adapters
+    implementation libs.kotshi.api
+    ksp libs.kotshi.compiler
+
+    // Retrofit
+    implementation libs.retrofit
+    implementation libs.retrofit.adapter.rxjava
+    implementation libs.retrofit.converter.moshi
+    implementation libs.okhttp.logging.interceptor
+
+    // Glide
+    implementation libs.glide
+    implementation (libs.glide.okhttp3) {
+        exclude group: "glide-parent"
+    }
+    ksp libs.glide.compiler
+
+    implementation project(":app-domain")
+    implementation project(":app-common")
+}

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "894249112826",
+    "project_id": "mockk-test-b8a64",
+    "storage_bucket": "mockk-test-b8a64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:894249112826:android:d96814f2aa21b3a57c2543",
+        "android_client_info": {
+          "package_name": "mobi.lab.throwabletest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWs-pNxuW2KxPfV9y2lcoa8u8uKrVlWxM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
